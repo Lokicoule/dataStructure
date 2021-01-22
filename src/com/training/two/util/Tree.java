@@ -1,5 +1,7 @@
 package com.training.two.util;
 
+import java.util.ArrayList;
+
 public class Tree {
     private class Node {
         private int value;
@@ -95,9 +97,9 @@ public class Tree {
     private void depthFirstInOrder(Node root) {
         if (root == null)
             return;
-        depthFirstPreOrder(root.leftChild);
+        depthFirstInOrder(root.leftChild);
         System.out.println(root);
-        depthFirstPreOrder(root.rightChild);
+        depthFirstInOrder(root.rightChild);
     }
 
     public void depthFirstPostOrder() {
@@ -107,9 +109,13 @@ public class Tree {
     private void depthFirstPostOrder(Node root) {
         if (root == null)
             return;
-        depthFirstPreOrder(root.leftChild);
-        depthFirstPreOrder(root.rightChild);
+        depthFirstPostOrder(root.leftChild);
+        depthFirstPostOrder(root.rightChild);
         System.out.println(root);
+    }
+
+    private boolean isLeaf(Node node) {
+        return node.leftChild == null && node.rightChild == null;
     }
 
     public int height() {
@@ -120,7 +126,87 @@ public class Tree {
         if (root == null)
             return -1;
 
-        if (root.leftChild == null && root.rightChild == null) return 0;
+        if (isLeaf(root)) return 0;
         return 1 + Math.max(height(root.leftChild), height(root.rightChild));
+    }
+
+    public int min() {
+        return min(root);
+    }
+
+    //O(Log N)
+    public int BTmin() {
+        var current = root;
+        var last = current;
+        while (current != null) {
+            last = current;
+            current = current.leftChild;
+        }
+        return last.value;
+    }
+    //O(N)
+    private int min(Node root) {
+        if (isLeaf(root))
+            return root.value;
+
+        var left = min(root.leftChild);
+        var right = min(root.rightChild);
+
+        return Math.min(Math.min(left, right), root.value);
+    }
+
+    public boolean equals(Tree other) {
+        if (other == null)
+            return false;
+
+        return equals(root, other.root);
+    }
+
+    private boolean equals(Node one, Node two) {
+        if (one == null && two == null)
+            return true;
+        if (one != null && two != null)
+            return one.value == two.value
+                    && equals(one.leftChild, two.leftChild)
+                    && equals(one.rightChild, two.rightChild);
+        return false;
+    }
+
+    public void swapRoot() {
+        var temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = temp;
+    }
+
+    public boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isBinarySearchTree(Node current, int min, int max) {
+        if (current == null) return true;
+
+        if (current.value < min || current.value > max)
+            return false;
+
+        return isBinarySearchTree(current.leftChild, min, current.value + 1)
+                && isBinarySearchTree(current.rightChild, current.value + 1, max);
+    }
+
+    public ArrayList<Node> kthDistance(int distance) {
+         return kthDistance(root, distance);
+    }
+
+    //differente version par mosh
+    //store dans 3° args list
+    private ArrayList<Node> kthDistance(Node root, int distance) {
+        ArrayList<Node> nodes = new ArrayList<>();
+        if (root == null) return nodes;
+        if (distance == 0) {
+            nodes.add(root);
+            return nodes;
+        }
+        nodes.addAll(kthDistance(root.leftChild, distance - 1));
+        nodes.addAll(kthDistance(root.rightChild, distance - 1));
+        return nodes;
     }
 }
