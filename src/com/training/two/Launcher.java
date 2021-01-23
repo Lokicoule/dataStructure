@@ -1,5 +1,6 @@
 package com.training.two;
 
+import com.training.two.util.AVLTree;
 import com.training.two.util.Tree;
 
 public class Launcher {
@@ -16,25 +17,11 @@ public class Launcher {
     }
 
     public static void main(String args[]) {
-        Tree tree = new Tree();
-        tree.insert(7);
-        tree.insert(4);
-        tree.insert(9);
-        tree.insert(1);
-        tree.insert(6);
-        tree.insert(8);
+        AVLTree tree = new AVLTree();
+        tree.insert(30);
+        tree.insert(20);
         tree.insert(10);
-        //System.out.println(tree.find(9));
-        //System.out.println(tree.find(17));
-        //System.out.println(tree);
-        //ree.breadthFirst();
-        //System.out.println(factorial(4));
-        //tree.depthFirstPreOrder();
-        //tree.depthFirstInOrder();
-        //tree.depthFirstPostOrder();
-        //System.out.println(fib(6));
-
-        System.out.println(tree.kthDistance(3));
+        System.out.println(tree);
     }
 }
 

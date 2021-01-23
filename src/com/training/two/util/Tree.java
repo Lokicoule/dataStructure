@@ -61,8 +61,10 @@ public class Tree {
         breadthFirst(root);
     }
 
+    //TraverseLevelOrder
     private void breadthFirst(Node root) {
-        System.out.println(root);
+        if (root != null)
+            System.out.println(root);
         var last = root;
         while (root != null) {
             if (root.leftChild != null)
@@ -75,6 +77,14 @@ public class Tree {
             else
                 root = last.leftChild;
             last = old;
+        }
+    }
+    //BreadthFirst other implementation
+    public void traverseLevelOrder() {
+        for (var i = 0; i <= height(); i++) {
+            for (var value : kthDistance(i)) {
+                System.out.println(value);
+            }
         }
     }
 
@@ -130,12 +140,8 @@ public class Tree {
         return 1 + Math.max(height(root.leftChild), height(root.rightChild));
     }
 
-    public int min() {
-        return min(root);
-    }
-
     //O(Log N)
-    public int BTmin() {
+    public int min() {
         var current = root;
         var last = current;
         while (current != null) {
@@ -144,6 +150,7 @@ public class Tree {
         }
         return last.value;
     }
+
     //O(N)
     private int min(Node root) {
         if (isLeaf(root))
@@ -208,5 +215,74 @@ public class Tree {
         nodes.addAll(kthDistance(root.leftChild, distance - 1));
         nodes.addAll(kthDistance(root.rightChild, distance - 1));
         return nodes;
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node root) {
+        if (root == null) return 0;
+
+        if (isLeaf(root)) return 1;
+
+        return 1 + size(root.leftChild)
+                + size(root.rightChild);
+    }
+
+    public int countLeaves() {
+        return countLeaves(root);
+    }
+
+    private int countLeaves(Node root) {
+        if (root == null) return 0;
+
+        if (isLeaf(root)) return 1;
+
+        return countLeaves(root.leftChild)
+                + countLeaves(root.rightChild);
+    }
+
+    public int max() {
+        if (root == null) throw new IllegalStateException();
+
+        return max(root);
+    }
+
+    private int max(Node root) {
+        if (root.rightChild == null)
+            return root.value;
+        return max(root.rightChild);
+    }
+
+    public boolean contains(int value) {
+        return contains(root, value);
+    }
+
+    private boolean contains(Node root, int value) {
+        if (root == null)
+            return false;
+        if (root.value == value)
+            return true;
+        return contains(root.leftChild, value)
+                || contains(root.rightChild, value);
+    }
+
+    public boolean areSibling(int one, int two) {
+        return areSibling(root, one, two);
+    }
+
+    private boolean areSibling(Node root, int one, int two) {
+        if (root == null)
+            return false;
+        boolean areSibling = false;
+        if (root.leftChild != null && root.rightChild != null)
+            areSibling = (root.leftChild.value == one &&  root.rightChild.value == two)
+                || (root.leftChild.value == two &&  root.rightChild.value == one);
+        return areSibling || areSibling(root.leftChild, one, two) || areSibling(root.rightChild, one, two);
+    }
+
+    public void getAncestor() {
+
     }
 }
