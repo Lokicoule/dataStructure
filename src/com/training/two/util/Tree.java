@@ -285,4 +285,12 @@ public class Tree {
     public void getAncestor() {
 
     }
+
+    public void isBalanced() {
+
+    }
+
+    public void isPerfect() {
+
+    }
 }

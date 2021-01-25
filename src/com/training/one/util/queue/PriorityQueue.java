@@ -1,7 +1,8 @@
 package com.training.one.util.queue;
 
 import java.util.Arrays;
-
+// O(n) - insertion
+// 0(1) - deletion
 public class PriorityQueue {
     int[] items;
     int count;
