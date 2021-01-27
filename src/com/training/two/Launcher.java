@@ -1,10 +1,7 @@
 package com.training.two;
 
 import com.training.two.usecase.Heapify;
-import com.training.two.util.AVLTree;
-import com.training.two.util.Heap;
-import com.training.two.util.HeapMin;
-import com.training.two.util.Tree;
+import com.training.two.util.*;
 
 public class Launcher {
 
@@ -41,18 +38,13 @@ public class Launcher {
     }
 
     public static void main(String args[]) {
-        int [] numbers = {5, 3, 8, 4, 1, 2};
-        System.out.println(Heapify.getKthLargest(numbers, 6));
-        //Heapify.heapify(numbers);
-        System.out.println(Heap.isMaxHeap(numbers));
+        Trie trie = new Trie();
 
-        HeapMin heap = new HeapMin();
-        heap.insert(12, "douze");
-        heap.insert(10, "dix");
-        heap.insert(8, "huit");
-        heap.remove();
-        heap.insert(20, "huit");
-
+        trie.insert("jan");
+        trie.insert("jank");
+        trie.remove("jank");
+        System.out.println(trie.contains("jank"));
+        trie.traverse();
     }
 }
 

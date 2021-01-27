@@ -22,11 +22,11 @@ public class HeapMin {
         bubbleUp();
     }
 
-    public Node remove() {
+    public String remove() {
         if (isEmpty())
             throw new IllegalStateException();
 
-        var root = nodes[0];
+        var root = nodes[0].value;
         nodes[0] = nodes[--size];
         bubbleDown();
 
