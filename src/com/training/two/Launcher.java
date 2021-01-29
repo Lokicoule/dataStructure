@@ -38,13 +38,17 @@ public class Launcher {
     }
 
     public static void main(String args[]) {
-        Trie trie = new Trie();
-
-        trie.insert("jan");
-        trie.insert("jank");
-        trie.remove("jank");
-        System.out.println(trie.contains("jank"));
-        trie.traverse();
+        Graph graph = new Graph();
+        graph.addNode("X");
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("P");
+        graph.addEdge("X", "A");
+        graph.addEdge("X", "B");
+        graph.addEdge("A", "P");
+        graph.addEdge("B", "P");
+        var t = graph.topologicalSort();
+        System.out.println(t);
     }
 }
 
