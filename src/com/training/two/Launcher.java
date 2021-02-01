@@ -38,17 +38,15 @@ public class Launcher {
     }
 
     public static void main(String args[]) {
-        Graph graph = new Graph();
-        graph.addNode("X");
+        var graph = new WeightedGraph();
         graph.addNode("A");
         graph.addNode("B");
-        graph.addNode("P");
-        graph.addEdge("X", "A");
-        graph.addEdge("X", "B");
-        graph.addEdge("A", "P");
-        graph.addEdge("B", "P");
-        var t = graph.topologicalSort();
-        System.out.println(t);
+        graph.addNode("C");
+        graph.addEdge("A", "B", 3);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("A", "C", 10);
+        graph.print();
+        System.out.println(graph.getShortestPath("A", "C"));
     }
 }
 
