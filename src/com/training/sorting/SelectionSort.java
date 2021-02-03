@@ -1,6 +1,6 @@
 package com.training.sorting;
 
-public class BubbleSort {
+public class SelectionSort {
 
     public static void sort(int[] arr) {
         boolean isSorted;
