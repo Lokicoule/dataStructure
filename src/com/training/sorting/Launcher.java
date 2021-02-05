@@ -9,7 +9,7 @@ public class Launcher {
         var arr = new int[] {8, 2, 4, 1, 3};
         System.out.println(Arrays.toString(arr));
         System.out.println("----------");
-        InsertionSort.sort(arr);
+        MergeSort.sort(arr);
         System.out.println("----------");
         System.out.println(Arrays.toString(arr));
     }

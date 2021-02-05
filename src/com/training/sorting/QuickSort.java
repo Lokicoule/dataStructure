@@ -2,7 +2,7 @@ package com.training.sorting;
 
 import java.util.Arrays;
 
-public class MergeSort {
+public class QuickSort {
 
     public static void sort(int[] arr) {
         if (arr.length == 1)
