@@ -3,18 +3,20 @@ package com.training.sorting;
 public class SelectionSort {
 
     public static void sort(int[] arr) {
-        boolean isSorted;
         for (var i = 0; i < arr.length; i++) {
-            isSorted = true;
-            for (var j = 1; j < arr.length - i; j++) {
-                if (arr[j] < arr[j - 1]) {
-                    swap(arr, j, j - 1);
-                    isSorted = false;
-                }
-            }
-            if (isSorted)
-                return;
+            int minIdx = findMinIdx(arr, i);
+            if (i != minIdx)
+                swap(arr, minIdx, i);
         }
+    }
+
+    private static int findMinIdx(int[] arr, int i) {
+        var minIdx = i;
+        for (var j = i; j < arr.length; j++) {
+            if (arr[j] < arr[minIdx])
+                minIdx = j;
+        }
+        return minIdx;
     }
 
     private static void swap(int[] arr, int one, int two) {
