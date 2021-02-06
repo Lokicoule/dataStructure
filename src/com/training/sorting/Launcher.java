@@ -6,10 +6,10 @@ public class Launcher {
 
 
     public static void main(String args[]) {
-        var arr = new int[] {8, 2, 4, 1, 3};
+        var arr = new int[] {15, 6, 3, 1, 22, 10, 13};
         System.out.println(Arrays.toString(arr));
         System.out.println("----------");
-        MergeSort.sort(arr);
+        QuickSort.sort(arr);
         System.out.println("----------");
         System.out.println(Arrays.toString(arr));
     }

@@ -5,31 +5,34 @@ import java.util.Arrays;
 public class QuickSort {
 
     public static void sort(int[] arr) {
-        if (arr.length == 1)
-            return;
-
-        var middleIdx = arr.length / 2;
-        var left = Arrays.copyOfRange(arr, 0, middleIdx);
-        var right = Arrays.copyOfRange(arr, middleIdx, arr.length);
-
-        sort(left);
-        sort(right);
-
-        merge(arr, left, right);
+        quickSort(arr, 0, arr.length - 1);
     }
 
-    private static void merge(int[] arr, int[] left, int[] right) {
-        int i = 0, j = 0, k = 0;
+    private static void quickSort(int[] arr, int start, int end) {
+        if (start >= end)
+            return;
 
-        while (i < left.length && j < right.length) {
-            if (left[i] <= right[j])
-                arr[k++] = left[i++];
-            else
-                arr[k++] = right[j++];
+        var boundary = partition(arr, start, end);
+
+        quickSort(arr, start, boundary - 1);
+        quickSort(arr, boundary + 1, end);
+    }
+
+    private static int partition(int[] arr, int start, int end) {
+        var pivot = arr[end];
+        var boundary = start - 1;
+
+        for (var i = start; i <= end; i++) {
+            if (arr[i] <= pivot)
+                swap(arr, i, ++boundary);
         }
-        while (i < left.length)
-            arr[k++] = left[i++];
-        while (j < right.length)
-            arr[k++] = right[j++];
+
+        return boundary;
+    }
+
+    private static void swap(int[] arr, int one, int two) {
+        var temp = arr[one];
+        arr[one] = arr[two];
+        arr[two] = temp;
     }
 }
