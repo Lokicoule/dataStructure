@@ -1,24 +1,28 @@
 package com.training.sorting;
 
+import com.training.one.util.linkedlist.LinkedList;
+
+import java.util.*;
+
 public class BucketSort {
 
-    public static void sort(int[] arr, int max) {
-        int[] counts = new int[max + 1];
+    public static void sort(int[] arr, int numberOfBuckets) {
+        var i = 0;
 
-        for (var item : arr)
-            counts[item]++;
-
-        var k = 0;
-        for (var i = 0; i < counts.length; i++) {
-            for (var j = counts[i]; j > 0; j--)
-                arr[k++] = i;
+        for (var bucket : createBuckets(arr, numberOfBuckets)) {
+            Collections.sort(bucket);
+            for (var item : bucket)
+                arr[i++] = item;
         }
     }
 
-    private static int findMaxValue(int[] arr) {
-        var max = 0;
-        for (var val : arr)
-            max = Math.max(max, val);
-        return max;
+    private static List<List<Integer>> createBuckets(int[] arr, int numberOfBuckets) {
+        List<List<Integer>> buckets = new ArrayList<>();
+        for (var i = 0; i < numberOfBuckets; i++)
+            buckets.add(new ArrayList<>());
+        for (var item : arr)
+            buckets.get(item / numberOfBuckets).add(item);
+        return buckets;
     }
+
 }
