@@ -4,12 +4,8 @@ import java.util.Arrays;
 
 public class Playground {
     public static void sort(int[] arr) {
-
     }
 
-    private static void merge(int[] arr, int[] left, int[] right) {
-
-    }
 
     private static void swap(int[] arr, int one, int two) {
         var temp = arr[one];
